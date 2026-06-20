@@ -41,7 +41,7 @@ namespace Eshopping_WebAPI.Controllers
                     Id = objCrd.InsertUser(objuser);
                     if(Id>0)
                     {
-                        String VerificationLink = "https://happymindmeal-eservice-g4dxbtbqhzane2g7.canadacentral-01.azurewebsites.net/api/User/Verification?userId=" + Id + "&VerficationCode=" + VerificationCode;
+                        String VerificationLink = "https://rpsingh-dev-eserviceapps-aqfwgbbbbpgxa0gh.canadacentral-01.azurewebsites.net/api/User/Verification?userId=" + Id + "&VerficationCode=" + VerificationCode;
                         bool IsEmailSent = util.send_email(objuser.EmailID, objuser.Name, VerificationLink);
                         if (IsEmailSent)
                         {
