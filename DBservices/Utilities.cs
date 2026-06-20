@@ -17,7 +17,7 @@ namespace Eshopping_WebAPI.DBservices
 
         MailMessage mail = new MailMessage();
         mail.To.Add(userEmail);
-        mail.From = new MailAddress("ramarchana.singh@gmail.com", "Take Away: my e-order");
+        mail.From = new MailAddress("ramarchana.singh@gmail.com", "Take Away: my e-servise");
         mail.Subject = "Accout Verification Email";
         //mail.SubjectEncoding = System.Text.Encoding.UTF8;
         mail.Body = body;

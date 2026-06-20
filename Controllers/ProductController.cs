@@ -119,7 +119,7 @@ namespace Eshopping_WebAPI.Controllers
                     body = body + "You order ID for you ref: " + orderID + System.Environment.NewLine + System.Environment.NewLine;
                     body = body +"Please visit the following link and login to track the order under your profile" 
                        + System.Environment.NewLine + System.Environment.NewLine
-                       + " https://eshopping-webapp.azurewebsites.net/#/ProfileViewPage"
+                       + " https://happymindmeal-eservice-g4dxbtbqhzane2g7.canadacentral-01.azurewebsites.net/#/ProfileViewPage"
                        + System.Environment.NewLine + System.Environment.NewLine
                         + System.Environment.NewLine + System.Environment.NewLine +
                        "Regards," + System.Environment.NewLine + "User Management Team";

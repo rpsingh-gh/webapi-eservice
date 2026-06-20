@@ -11,6 +11,9 @@
     <Content Remove="images\**" />
     <EmbeddedResource Remove="images\**" />
     <None Remove="images\**" />
+	  <Content Include="Photos\**\*">
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
   </ItemGroup>
 
   <ItemGroup>
