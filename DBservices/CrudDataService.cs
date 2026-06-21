@@ -455,7 +455,8 @@ namespace Eshopping_WebAPI.DBservices
             SqlConnection Conn = objConn.GetConnection;
             try
             {
-                if (HasRecentOrderAsync(crteOrdr.CustomerId, Conn))
+               bool exists = HasRecentOrderAsync(crteOrdr.CustomerId, Conn).Result;  
+                if (exists)
                     return result;
 
                 if (Conn.State != System.Data.ConnectionState.Open) Conn.Open();
@@ -508,14 +509,17 @@ namespace Eshopping_WebAPI.DBservices
                 }
             }
         }
-        public bool HasRecentOrderAsync(int customerId, SqlConnection Conn)
+        public async Task<bool> HasRecentOrderAsync(int customerId, SqlConnection conn)
         {
-          using var command = new SqlCommand("sp_CheckRecentOrder", Conn);
+            using var command = new SqlCommand("sp_CheckRecentOrder", conn);
             command.CommandType = CommandType.StoredProcedure;
 
             command.Parameters.AddWithValue("@CustomerId", customerId);
-            Conn.OpenAsync();
-            var result = command.ExecuteScalarAsync();
+
+            await conn.OpenAsync();
+
+            var result = await command.ExecuteScalarAsync();
+
             return Convert.ToInt32(result) == 1;
         }
 
