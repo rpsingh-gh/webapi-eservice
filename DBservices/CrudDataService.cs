@@ -8,6 +8,7 @@ using Eshopping_WebAPI.Model;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using System.Reflection.PortableExecutable;
+using Microsoft.Extensions.Configuration;
 
 namespace Eshopping_WebAPI.DBservices
 {
@@ -449,11 +450,12 @@ namespace Eshopping_WebAPI.DBservices
         }
         public Int32 CreateOrder(ProductOrder crteOrdr)
         {
+            int result = 0;
             dbConnector objConn = new dbConnector();
             SqlConnection Conn = objConn.GetConnection;
             Conn.Open();
-
-            int result = 0;
+            if (HasRecentOrderAsync(crteOrdr.CustomerId, Conn))
+                return result;
 
             try
             {
@@ -507,6 +509,17 @@ namespace Eshopping_WebAPI.DBservices
                 }
             }
         }
+        public bool HasRecentOrderAsync(int customerId, SqlConnection Conn)
+        {
+          using var command = new SqlCommand("sp_CheckRecentOrder", Conn);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@CustomerId", customerId);
+            Conn.OpenAsync();
+            var result = command.ExecuteScalarAsync();
+            return Convert.ToInt32(result) == 1;
+        }
+
         public List<ListOrder> GetOrderList()
         {
             dbConnector objConn = new dbConnector();
