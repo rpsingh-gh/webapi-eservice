@@ -453,9 +453,6 @@ namespace Eshopping_WebAPI.DBservices
             int result = 0;
             dbConnector objConn = new dbConnector();
             SqlConnection Conn = objConn.GetConnection;
-            Conn.Open();
-           
-
             try
             {
                 if (HasRecentOrderAsync(crteOrdr.CustomerId, Conn))
