@@ -454,11 +454,13 @@ namespace Eshopping_WebAPI.DBservices
             dbConnector objConn = new dbConnector();
             SqlConnection Conn = objConn.GetConnection;
             Conn.Open();
-            if (HasRecentOrderAsync(crteOrdr.CustomerId, Conn))
-                return result;
+           
 
             try
             {
+                if (HasRecentOrderAsync(crteOrdr.CustomerId, Conn))
+                    return result;
+
                 if (Conn.State != System.Data.ConnectionState.Open) Conn.Open();
 
                 SqlCommand objCommand = new SqlCommand("CREATE_ORDER", Conn);
